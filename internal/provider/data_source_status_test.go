@@ -7,26 +7,26 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccResourceScaffolding(t *testing.T) {
-	t.Skip("resource not yet implemented, remove this once you add your own code")
+func TestAccDataSourceStatus(t *testing.T) {
+	t.Skip("data source not yet implemented, remove this once you add your own code")
 
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceScaffolding,
+				Config: testAccDataSourceStatus,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestMatchResourceAttr(
-						"scaffolding_resource.foo", "sample_attribute", regexp.MustCompile("^ba")),
+						"data.statuspage_status.foo", "sample_attribute", regexp.MustCompile("^ba")),
 				),
 			},
 		},
 	})
 }
 
-const testAccResourceScaffolding = `
-resource "scaffolding_resource" "foo" {
+const testAccDataSourceStatus = `
+data "statuspage_status" "foo" {
   sample_attribute = "bar"
 }
 `
